@@ -1,0 +1,41 @@
+MYSQL TASK - EMPLOYEE MANAGEMENT SYSTEM
+
+1. Create a database named company_db.
+
+2. Create an employees table with employee_id, employee_name, email, department, salary, city, experience, and status. Make employee_id the PRIMARY KEY.
+
+3. Make employee_name, email, and department NOT NULL.
+
+4. Insert at least 10 employee records into the employees table.
+
+5. Display all employee records.
+
+6. Display only employee_name, department, and salary.
+
+7. Display employees whose salary is greater than 50000.
+
+8. Display employees who have more than 2 years of experience.
+
+9. Display employees who work in the Java department AND have a salary greater than 50000.
+
+10. Display employees who are from Pune OR Mumbai.
+
+11. Display employees who work in the Java OR Python department.
+
+12. Display employees who are NOT from Pune.
+
+13. Display employees whose salary is greater than 40000 AND experience is greater than 1.
+
+14. Display employees whose city is Pune OR Mumbai AND salary is greater than 40000.
+
+15. An employee gets a salary increment. Update the salary of a particular employee.
+
+16. An employee moves from Pune to Mumbai. Update the employee's city.
+
+17. An employee leaves the company. Delete that employee's record.
+
+18. Add a new column phone to the employees table using ALTER TABLE.
+
+19. Remove the phone column using ALTER TABLE.
+
+20. Create a temporary table named old_employees and then DROP the table.

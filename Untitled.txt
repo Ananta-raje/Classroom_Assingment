@@ -1,0 +1,75 @@
+
+mysql> select * from employees;
++-------------+--------+------------+------------+----------+--------+
+| employee_id | name   | department | experience | salary   | city   |
++-------------+--------+------------+------------+----------+--------+
+|           1 | Ananta | IT         |          0 | 25000.00 | Pune   |
+|           2 | Rahul  | IT         |          2 | 45000.00 | Mumbai |
+|           3 | Priya  | HR         |          0 | 28000.00 | Pune   |
+|           4 | Amit   | Finance    |          5 | 65000.00 | Nagpur |
+|           5 | Sneha  | IT         |          1 | 35000.00 | Nashik |
+|           6 | Rohan  | HR         |          0 | 30000.00 | Pune   |
++-------------+--------+------------+------------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'pune' AND name = 'Ananta';
+Empty set (0.00 sec)
+
+mysql> select * from employees WHERE NOT (city = 'pune' AND name = 'Ananta');
++-------------+-------+------------+------------+----------+--------+
+| employee_id | name  | department | experience | salary   | city   |
++-------------+-------+------------+------------+----------+--------+
+|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
+|           3 | Priya | HR         |          0 | 28000.00 | Pune   |
+|           4 | Amit  | Finance    |          5 | 65000.00 | Nagpur |
+|           5 | Sneha | IT         |          1 | 35000.00 | Nashik |
+|           6 | Rohan | HR         |          0 | 30000.00 | Pune   |
++-------------+-------+------------+------------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT (city = 'pune') AND (name = 'Ananta');
+Empty set (0.00 sec)
+
+mysql> select * from employees WHERE (NOT city = 'pune' AND name = 'Ananta');
+Empty set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'pune' AND name = 'Rahul';
++-------------+-------+------------+------------+----------+--------+
+| employee_id | name  | department | experience | salary   | city   |
++-------------+-------+------------+------------+----------+--------+
+|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
++-------------+-------+------------+------------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul';
++-------------+-------+------------+------------+----------+--------+
+| employee_id | name  | department | experience | salary   | city   |
++-------------+-------+------------+------------+----------+--------+
+|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
++-------------+-------+------------+------------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul' AND department = 'IT';
++-------------+-------+------------+------------+----------+--------+
+| employee_id | name  | department | experience | salary   | city   |
++-------------+-------+------------+------------+----------+--------+
+|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
++-------------+-------+------------+------------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul' AND department = 'HR';
+Empty set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'Nagpur' OR name = 'Rahul';
++-------------+--------+------------+------------+----------+--------+
+| employee_id | name   | department | experience | salary   | city   |
++-------------+--------+------------+------------+----------+--------+
+|           1 | Ananta | IT         |          0 | 25000.00 | Pune   |
+|           2 | Rahul  | IT         |          2 | 45000.00 | Mumbai |
+|           3 | Priya  | HR         |          0 | 28000.00 | Pune   |
+|           5 | Sneha  | IT         |          1 | 35000.00 | Nashik |
+|           6 | Rohan  | HR         |          0 | 30000.00 | Pune   |
++-------------+--------+------------+------------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> ^A

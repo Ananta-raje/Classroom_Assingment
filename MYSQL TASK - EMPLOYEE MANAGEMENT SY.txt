@@ -1,0 +1,534 @@
+MYSQL TASK - EMPLOYEE MANAGEMENT SYSTEM
+
+1. Create a database named company_db.
+
+2. Create an employees table with employee_id, employee_name, email, department, salary, city, experience, and status. Make employee_id the PRIMARY KEY.
+
+3. Make employee_name, email, and department NOT NULL.
+
+4. Insert at least 10 employee records into the employees table.
+
+5. Display all employee records.
+
+6. Display only employee_name, department, and salary.
+
+7. Display employees whose salary is greater than 50000.
+
+8. Display employees who have more than 2 years of experience.
+
+9. Display employees who work in the Java department AND have a salary greater than 50000.
+
+10. Display employees who are from Pune OR Mumbai.
+
+11. Display employees who work in the Java OR Python department.
+
+12. Display employees who are NOT from Pune.
+
+13. Display employees whose salary is greater than 40000 AND experience is greater than 1.
+
+14. Display employees whose city is Pune OR Mumbai AND salary is greater than 40000.
+
+15. An employee gets a salary increment. Update the salary of a particular employee.
+
+16. An employee moves from Pune to Mumbai. Update the employee's city.
+
+17. An employee leaves the company. Delete that employee's record.
+
+18. Add a new column phone to the employees table using ALTER TABLE.
+
+19. Remove the phone column using ALTER TABLE.
+
+20. Create a temporary table named old_employees and then DROP the table.
+
+
+solution =>>
+
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| clone_dbs          |
+| college            |
+| crud_data          |
+| delta_app          |
+| employeefinancedb  |
+| hms                |
+| hospital_db        |
+| info_db            |
+| information_schema |
+| microfinancedb     |
+| my_project         |
+| mysql              |
+| performance_schema |
+| registration_app   |
+| restaurantdb       |
+| resume_analyzer    |
+| sakila             |
+| societywebbappdb   |
+| sys                |
+| tb_item            |
+| thekiranacademy    |
+| user               |
+| world              |
+| xyz_company        |
++--------------------+
+24 rows in set (0.01 sec)
+
+mysql> use thekiranacademy;
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_thekiranacademy |
++---------------------------+
+| customers                 |
+| employees                 |
+| insurance                 |
++---------------------------+
+3 rows in set (0.01 sec)
+
+mysql> create DATABASES company_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASES company_db' at line 1
+mysql> create DATABASE company_db;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| clone_dbs          |
+| college            |
+| company_db         |
+| crud_data          |
+| delta_app          |
+| employeefinancedb  |
+| hms                |
+| hospital_db        |
+| info_db            |
+| information_schema |
+| microfinancedb     |
+| my_project         |
+| mysql              |
+| performance_schema |
+| registration_app   |
+| restaurantdb       |
+| resume_analyzer    |
+| sakila             |
+| societywebbappdb   |
+| sys                |
+| tb_item            |
+| thekiranacademy    |
+| user               |
+| world              |
+| xyz_company        |
++--------------------+
+25 rows in set (0.00 sec)
+
+mysql> use company_db;
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table employees;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table employees(employee_id int PRIMARY KEY, employee_name VARCHAR(70) NOT NULL, email VARCHAR(100) NOT NULL, department VARCHAR(50) NOT NULL, salary bigint, city VARCHAR(70), experience int, status VARCHAR(80));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from employees;
+Empty set (0.01 sec)
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employee_id   | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   |     | NULL    |       |
+| email         | varchar(100) | NO   |     | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> Insert into employees values(1,Ananta,ananta@gmail.com,IT,500000,pune,2,active);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@gmail.com,IT,500000,pune,2,active)' at line 1
+mysql> Insert into employees values(1,Ananta,ananta@gmail.com,development,500000,pune,2,active);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '@gmail.com,development,500000,pune,2,active)' at line 1
+mysql> Insert into employees values(1,'Ananta','ananta@gmail.com','development',500000,'pune',2,'active');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employees;
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+| employee_id | employee_name | email            | department  | salary | city | experience | status |
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune |          2 | active |
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+| employee_id | employee_name | email            | department  | salary | city | experience | status |
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune |          2 | active |
++-------------+---------------+------------------+-------------+--------+------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> Insert into employees values(1,'Ananta','ananta@gmail.com','development',500000,'pune',2,'active');INSERT INTO employees VALUES
+ERROR 1062 (23000): Duplicate entry '1' for key 'employees.PRIMARY'
+    -> (1, 'Ananta', 'ananta@gmail.com', 'development', 500000, 'Pune', 2, 'active'),
+    -> (2, 'Rohit', 'rohit@gmail.com', 'testing', 450000, 'Mumbai', 1, 'active'),
+    -> (3, 'Priya', 'priya@gmail.com', 'development', 700000, 'Pune', 3, 'active'),
+    -> (4, 'Sneha', 'sneha@gmail.com', 'hr', 400000, 'Nagpur', 2, 'active'),
+    -> (5, 'Amit', 'amit@gmail.com', 'development', 850000, 'Mumbai', 4, 'active'),
+    -> (6, 'Neha', 'neha@gmail.com', 'marketing', 550000, 'Nashik', 3, 'inactive'),
+    -> (7, 'Rahul', 'rahul@gmail.com', 'testing', 600000, 'Pune', 2, 'active'),
+    -> (8, 'Pooja', 'pooja@gmail.com', 'hr', 480000, 'Aurangabad', 1, 'active'),
+    -> (9, 'Vikas', 'vikas@gmail.com', 'development', 900000, 'Bangalore', 5, 'active'),
+    -> Insert into employees values(1,'Ananta','ananta@gmail.com','development',500000,'pune',2,'active');INSERT INTO employees VALUES
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Insert into employees values(1,'Ananta','ananta@gmail.com','development',500000,' at line 11
+    ->
+    ->
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> Insert into employees values(2, 'Rohit', 'rohit@gmail.com', 'testing', 450000, 'Mumbai', 1, 'active'),
+    -> (3, 'Priya', 'priya@gmail.com', 'development', 700000, 'Pune', 3, 'active'),
+    -> (4, 'Sneha', 'sneha@gmail.com', 'hr', 400000, 'Nagpur', 2, 'active'),
+    -> (5, 'Amit', 'amit@gmail.com', 'development', 850000, 'Mumbai', 4, 'active'),
+    -> (6, 'Neha', 'neha@gmail.com', 'marketing', 550000, 'Nashik', 3, 'inactive'),
+    -> (7, 'Rahul', 'rahul@gmail.com', 'testing', 600000, 'Pune', 2, 'active'),
+    -> (8, 'Pooja', 'pooja@gmail.com', 'hr', 480000, 'Aurangabad', 1, 'active'),
+    -> (9, 'Vikas', 'vikas@gmail.com', 'development', 900000, 'Bangalore', 5, 'active'),
+    -> (10, 'Kiran', 'kiran@gmail.com', 'marketing', 650000, 'Pune', 4, 'inactive');
+Query OK, 9 rows affected (0.01 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees;
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city       | experience | status   |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune       |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          | 400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   | 550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          | 480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development | 900000 | Bangalore  |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune       |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| employee_id   | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   |     | NULL    |       |
+| email         | varchar(100) | NO   |     | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select name,department,salary from employees;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select employee_name,department,salary from employees;
++---------------+-------------+--------+
+| employee_name | department  | salary |
++---------------+-------------+--------+
+| Ananta        | development | 500000 |
+| Rohit         | testing     | 450000 |
+| Priya         | development | 700000 |
+| Sneha         | hr          | 400000 |
+| Amit          | development | 850000 |
+| Neha          | marketing   | 550000 |
+| Rahul         | testing     | 600000 |
+| Pooja         | hr          | 480000 |
+| Vikas         | development | 900000 |
+| Kiran         | marketing   | 650000 |
++---------------+-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city       | experience | status   |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune       |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          | 400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   | 550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          | 480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development | 900000 | Bangalore  |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune       |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE salary > 50000;
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city       | experience | status   |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune       |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          | 400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   | 550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          | 480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development | 900000 | Bangalore  |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune       |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE salary > 500000;
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+| employee_id | employee_name | email           | department  | salary | city      | experience | status   |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+|           3 | Priya         | priya@gmail.com | development | 700000 | Pune      |          3 | active   |
+|           5 | Amit          | amit@gmail.com  | development | 850000 | Mumbai    |          4 | active   |
+|           6 | Neha          | neha@gmail.com  | marketing   | 550000 | Nashik    |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com | testing     | 600000 | Pune      |          2 | active   |
+|           9 | Vikas         | vikas@gmail.com | development | 900000 | Bangalore |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com | marketing   | 650000 | Pune      |          4 | inactive |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE experience > 2;
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+| employee_id | employee_name | email           | department  | salary | city      | experience | status   |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+|           3 | Priya         | priya@gmail.com | development | 700000 | Pune      |          3 | active   |
+|           5 | Amit          | amit@gmail.com  | development | 850000 | Mumbai    |          4 | active   |
+|           6 | Neha          | neha@gmail.com  | marketing   | 550000 | Nashik    |          3 | inactive |
+|           9 | Vikas         | vikas@gmail.com | development | 900000 | Bangalore |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com | marketing   | 650000 | Pune      |          4 | inactive |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE department = 'development' AND salary > 500000;
++-------------+---------------+-----------------+-------------+--------+-----------+------------+--------+
+| employee_id | employee_name | email           | department  | salary | city      | experience | status |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+--------+
+|           3 | Priya         | priya@gmail.com | development | 700000 | Pune      |          3 | active |
+|           5 | Amit          | amit@gmail.com  | development | 850000 | Mumbai    |          4 | active |
+|           9 | Vikas         | vikas@gmail.com | development | 900000 | Bangalore |          5 | active |
++-------------+---------------+-----------------+-------------+--------+-----------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE city = 'pune' OR city 'mumbai';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''mumbai'' at line 1
+mysql> select * from employees WHERE city = 'pune' OR city ='mumbai';
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city   | experience | status   |
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune   |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune   |          3 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai |          4 | active   |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune   |          2 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune   |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE department = 'development' OR department = 'testing';
++-------------+---------------+------------------+-------------+--------+-----------+------------+--------+
+| employee_id | employee_name | email            | department  | salary | city      | experience | status |
++-------------+---------------+------------------+-------------+--------+-----------+------------+--------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune      |          2 | active |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai    |          1 | active |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune      |          3 | active |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai    |          4 | active |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune      |          2 | active |
+|           9 | Vikas         | vikas@gmail.com  | development | 900000 | Bangalore |          5 | active |
++-------------+---------------+------------------+-------------+--------+-----------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE NOT city = 'pune';
++-------------+---------------+-----------------+-------------+--------+------------+------------+----------+
+| employee_id | employee_name | email           | department  | salary | city       | experience | status   |
++-------------+---------------+-----------------+-------------+--------+------------+------------+----------+
+|           2 | Rohit         | rohit@gmail.com | testing     | 450000 | Mumbai     |          1 | active   |
+|           4 | Sneha         | sneha@gmail.com | hr          | 400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com  | development | 850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com  | marketing   | 550000 | Nashik     |          3 | inactive |
+|           8 | Pooja         | pooja@gmail.com | hr          | 480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com | development | 900000 | Bangalore  |          5 | active   |
++-------------+---------------+-----------------+-------------+--------+------------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE salary > 400000 AND experience > 1;
++-------------+---------------+------------------+-------------+--------+-----------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city      | experience | status   |
++-------------+---------------+------------------+-------------+--------+-----------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune      |          2 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune      |          3 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai    |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   | 550000 | Nashik    |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune      |          2 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development | 900000 | Bangalore |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune      |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+-----------+------------+----------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employees WHERE city = 'pune' OR city ='mumbai' AND salary > 400000;
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+| employee_id | employee_name | email            | department  | salary | city   | experience | status   |
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 500000 | pune   |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     | 450000 | Mumbai |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development | 700000 | Pune   |          3 | active   |
+|           5 | Amit          | amit@gmail.com   | development | 850000 | Mumbai |          4 | active   |
+|           7 | Rahul         | rahul@gmail.com  | testing     | 600000 | Pune   |          2 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   | 650000 | Pune   |          4 | inactive |
++-------------+---------------+------------------+-------------+--------+--------+------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> update employees set salary = 2000000 where name = 'Ananta';
+ERROR 1054 (42S22): Unknown column 'name' in 'where clause'
+mysql> update employees set salary = 2000000 where employee_id = 1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees ;
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary  | city       | experience | status   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development |  700000 | Pune       |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   |  650000 | Pune       |          4 | inactive |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> update employees set city = 'mumbai' where employee_id = 3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employees ;
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary  | city       | experience | status   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development |  700000 | mumbai     |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |
+|          10 | Kiran         | kiran@gmail.com  | marketing   |  650000 | Pune       |          4 | inactive |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+10 rows in set (0.00 sec)
+
+mysql> Delete from employees where employee_id = 10;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employees ;
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary  | city       | experience | status   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development |  700000 | mumbai     |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+9 rows in set (0.00 sec)
+
+mysql> Alter table employees ADD phone_no bigint;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees ;
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+----------+
+| employee_id | employee_name | email            | department  | salary  | city       | experience | status   | phone_no |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |     NULL |
+|           2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |     NULL |
+|           3 | Priya         | priya@gmail.com  | development |  700000 | mumbai     |          3 | active   |     NULL |
+|           4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |     NULL |
+|           5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |     NULL |
+|           6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |     NULL |
+|           7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |     NULL |
+|           8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |     NULL |
+|           9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |     NULL |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+----------+
+9 rows in set (0.00 sec)
+
+mysql> Alter table employees drop column phone_no;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employees ;
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+| employee_id | employee_name | email            | department  | salary  | city       | experience | status   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+|           1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |
+|           2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |
+|           3 | Priya         | priya@gmail.com  | development |  700000 | mumbai     |          3 | active   |
+|           4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |
+|           5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |
+|           6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |
+|           7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |
+|           8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |
+|           9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |
++-------------+---------------+------------------+-------------+---------+------------+------------+----------+
+9 rows in set (0.00 sec)
+
+mysql> create table old_employees(id int , name varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
+| old_employees        |
++----------------------+
+2 rows in set (0.00 sec)
+
+mysql> drop table old_employees;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql>
