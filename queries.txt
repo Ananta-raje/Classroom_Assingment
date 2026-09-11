@@ -1,0 +1,129 @@
++--------------------+
+26 rows in set (0.01 sec)
+
+mysql> use company_db;
+Database changed
+mysql> show tables;
++----------------------+
+| Tables_in_company_db |
++----------------------+
+| employees            |
++----------------------+
+1 row in set (0.02 sec)
+
+mysql> select * from employees;
++----+---------------+------------------+-------------+---------+------------+------------+----------+
+| id | employee_name | email            | department  | salary  | city       | experience | status   |
++----+---------------+------------------+-------------+---------+------------+------------+----------+
+|  1 | Ananta        | ananta@gmail.com | development | 2000000 | pune       |          2 | active   |
+|  2 | Rohit         | rohit@gmail.com  | testing     |  450000 | Mumbai     |          1 | active   |
+|  3 | Priya         | priya@gmail.com  | development |  700000 | mumbai     |          3 | active   |
+|  4 | Sneha         | sneha@gmail.com  | hr          |  400000 | Nagpur     |          2 | active   |
+|  5 | Amit          | amit@gmail.com   | development |  850000 | Mumbai     |          4 | active   |
+|  6 | Neha          | neha@gmail.com   | marketing   |  550000 | Nashik     |          3 | inactive |
+|  7 | Rahul         | rahul@gmail.com  | testing     |  600000 | Pune       |          2 | active   |
+|  8 | Pooja         | pooja@gmail.com  | hr          |  480000 | Aurangabad |          1 | active   |
+|  9 | Vikas         | vikas@gmail.com  | development |  900000 | Bangalore  |          5 | active   |
++----+---------------+------------------+-------------+---------+------------+------------+----------+
+9 rows in set (0.02 sec)
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   |     | NULL    |       |
+| email         | varchar(100) | NO   |     | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> Alter table employees modify column employee-name NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-name NULL' at line 1
+mysql> Alter table employees modify column employee-name varchar(70) NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-name varchar(70) NULL' at line 1
+mysql> Alter table employees modify column employee_name NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NULL' at line 1
+mysql> Alter table employees modify column employee_name varchar(70) NULL;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | YES  |     | NULL    |       |
+| email         | varchar(100) | NO   |     | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> Alter table employees modify column employee_name varchar(70) NOT NULL;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   |     | NULL    |       |
+| email         | varchar(100) | NO   |     | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALter table employees modify column email varchar(100) NULL;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALter table employees modify column email varchar(100) UNIQUE;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   |     | NULL    |       |
+| email         | varchar(100) | YES  | UNI | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALter table employees ADD UNIQUE (employee_name);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employees;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | int          | NO   | PRI | NULL    |       |
+| employee_name | varchar(70)  | NO   | UNI | NULL    |       |
+| email         | varchar(100) | YES  | UNI | NULL    |       |
+| department    | varchar(50)  | NO   |     | NULL    |       |
+| salary        | bigint       | YES  |     | NULL    |       |
+| city          | varchar(70)  | YES  |     | NULL    |       |
+| experience    | int          | YES  |     | NULL    |       |
+| status        | varchar(80)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)

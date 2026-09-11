@@ -1,0 +1,431 @@
+                                                                   Write each & every queries including this topics?
+
+topics are : CRUD operation, primary key, unique  key, auto_increment, NOT null, check, default, operators, datatypes, clause : where, order_by, Aggregate functions : avg, sum, min, max, count, limit offset, Alias, alter queries, comments    
+_____________________________________________________________________________________________________________________________________________________________________________________
+
+Q1. Employee Management
+
+You have an employees table:
+
+employees(
+    id,
+    name,
+    email,
+    age,
+    salary,
+    city
+)
+
+Write a query to insert one new employee whose:
+
+name = Rahul
+email = rahul@gmail.com
+age = 25
+salary = 45000
+city = Pune
+
+ANS : INSERT INTO employees VALUES(1, 'Rahul', 'rahul@gmail.com', 25, 45000, 'Pune');
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q2. Student Records
+
+A student named Amit changed his city from Nagpur to Pune.
+
+Write a query to update his city.
+
+ANS: UPDATE employees set city = 'Pune' where name = 'Amit';
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q3. Product Management
+
+A company wants to remove a product whose product_id = 105.
+
+Write the query to delete that product.
+
+ANS: DELETE from product where product_id = 105;
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q4. Employee Search
+
+Find all employees whose salary is greater than ₹50,000.
+
+ANS: SELECT * from employees where salary  > 50000;
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q5. Pune Employees
+
+Find all employees who are working in Pune.
+
+ANS: SELECT * from employees WHERE city = 'Pune';
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q6. Age Range
+
+Find employees whose age is between 22 and 30.
+
+Try solving this using an operator.
+
+ANS: SELECT * from employees WHERE age BETWEEN 22 AND 30;
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q7. Multiple Conditions
+
+Find employees who:
+
+live in Pune
+AND
+have salary greater than ₹40,000.
+
+ANS: SELECT * from employees where city = 'Pune' AND salary > 40000;
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Q8. Salary Sorting
+
+Display all employees from highest salary to lowest salary.
+
+ANS: SELECT * from employees ORDER BY salary DESC;
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q9. Youngest Employees
+
+Display employees from youngest to oldest.
+
+ANS:  SELECT * from employees ORDER BY age ASC;
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q10. Top Salaries
+
+The HR manager wants to see only the top 5 highest-paid employees.
+
+Write the query.
+
+ANS:  SELECT * from employees ORDER BY salary DESC LIMIT 5;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q11. Average Salary
+
+The HR department wants to know:
+
+"What is the average salary of all employees?"
+
+Use AVG().
+
+ANS: SELECT AVG(salary) AS avg_salary from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q12. Total Salary
+
+Calculate the total salary expense of the company.
+
+Use SUM().
+
+ANS: SELECT SUM(salary) AS sum_all from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q13. Highest Salary
+
+Find the maximum salary among all employees.
+
+Use MAX().
+
+ANS: SELECT MAX(salary) AS max_salary from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q14. Lowest Salary
+
+Find the minimum salary among all employees.
+
+Use MIN().
+ANS:  SELECT MIN(salary) AS min_salary from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q15. Employee Count
+
+The HR department wants to know:
+
+"How many employees are currently present in the company?"
+
+Use COUNT().
+
+ANS: SELECT COUNT(*) from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q16. Pune Employee Count
+
+Find the number of employees working in Pune.
+
+Use:
+
+WHERE
+COUNT()
+
+ANS: SELECT COUNT(*) from employees where city ='Pune';
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q17. Salary Report
+
+Display:
+
+Average Salary
+Maximum Salary
+Minimum Salary
+Total Salary
+
+in a single query.
+
+Give meaningful aliases such as:
+
+average_salary
+highest_salary
+lowest_salary
+total_salary
+
+ANS: SELECT AVG(salary) AS average_salary, MAX(salary) AS highest_salary, MIN(salary) AS lowest_salary, SUM(salary) total_salary from employees;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q18. Top 3 Highest Salaries
+
+Find the 3 employees having the highest salary.
+
+Display:
+
+name
+salary
+
+ANS: SELECT name, salary from employees ORDER BY salary DESC LIMIT 3;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q19. Second Page of Employees
+
+Suppose employees are displayed 10 at a time.
+
+The first page contains employees 1–10.
+
+Write a query to retrieve employees 11–20.
+
+Use:
+
+LIMIT
+OFFSET
+
+ANS: SELECT * from employees  LIMIT 10 OFFSET 10;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q20. Third Page
+
+Now retrieve employees 21–30.
+
+Again use LIMIT and OFFSET.
+
+ANS: SELECT * from employees LIMIT 10 OFFSET 20;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q21. Employee Table Design
+
+Create an employees table with these requirements:
+
+id → integer, automatically generated and Primary Key
+name → cannot be NULL
+email → must be unique
+age → cannot be less than 18
+salary → cannot be less than 0
+city → default should be Pune
+
+Write the complete CREATE TABLE query.
+
+ANS: CREATE TABLE employees(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(70) NOT NULL, email VARCHAR(90) UNIQUE, age INT, salary BIGINT, city VARCHAR(50) DEFAULT 'Pune', CHECK(age >= 18), CHECK(salary >= 0));
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q22. Add a Constraint
+
+You already have:
+
+employees
+
+with a salary column.
+
+Now HR decides:
+
+"No employee should have salary less than ₹20,000."
+
+Add an appropriate CHECK constraint using ALTER TABLE.
+
+ANS: ALTER TABLE employees ADD constraint salary_chk CHECK(salary > 20000);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q23. Add a New Column
+
+The company wants to store employees' phone numbers.
+
+Add:
+
+phone_number VARCHAR(15)
+
+to the existing employees table.
+
+ANS: ALTER TABLE employees ADD column phone_number VARCHAR(15);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q24. Make a Column UNIQUE
+
+You already have:
+
+employees.email
+
+but it currently allows duplicate emails.
+
+Make the email column UNIQUE using ALTER TABLE.
+
+ANS: ALTER TABLE employees ADD UNIQUE(email);  or
+ALTER TABLE employees ADD constraint email_unique UNIQUE(email);or
+ALTER TABLE employees MODIFY column email VARCHAR(90) UNIQUE;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q25. Add NOT NULL
+
+The company decides that every employee must have a name.
+
+Modify the existing name column so that it cannot contain NULL.
+
+ANS: ALTER table employees MODIFY column name VARCHAR(70) NOT NULL; 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q26. Add Default Value
+
+Your employees table has a city column.
+
+If no city is provided while inserting an employee, the company wants the city to automatically become:
+
+Pune
+
+Add this using ALTER TABLE.
+
+ANS: ALTER table employees MODIFY column city VARCHAR(50) DEFAULT 'Pune';
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q27. E-Commerce Product System
+
+You have:
+
+products
+
+with:
+
+product_id
+product_name
+price
+quantity
+category
+
+Write a query to find products where:
+
+price is greater than ₹1,000
+quantity is greater than 0
+category is Electronics
+
+Sort the result by price from highest to lowest.
+
+ANS: SELECT * from products Where price > 1000 AND quantity > 0 AND category = 'Electronics' ORDER BY price DESC;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q28. Bank Customer System
+
+You have:
+
+customers
+
+with:
+
+customer_id
+customer_name
+age
+city
+balance
+
+The bank wants a report containing customers who:
+
+are at least 18 years old
+have balance greater than ₹50,000
+live in either Pune or Mumbai
+
+Sort them by balance from highest to lowest.
+
+ANS: SELECT * from customers Where age >= 18 AND balance > 50000 AND city IN('Pune', 'Mumbai') ORDER BY balance DESC;
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Q29. Employee Salary Analysis ⭐
+
+Your manager asks:
+
+"Show me the names and salaries of employees whose salary is greater than the company's average salary."
+
+You already know:
+
+AVG(salary)
+
+Think carefully:
+
+Can you directly use an aggregate function inside WHERE?
+
+If not, solve this using only the topics you have learned so far, or explain why it cannot be done with your current topics.
+
+This is a very good interview-thinking question.
+
+ANS: SELECT names, salary from employees where salary > (select AVG(salary) from employees);
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q30. 🏆 Complete Company Database Challenge
+
+Create an employees table satisfying all these requirements:
+
+Column	Requirement
+id	INT, Primary Key, AUTO_INCREMENT
+name	VARCHAR, NOT NULL
+email	VARCHAR, UNIQUE
+age	INT, CHECK age ≥ 18
+salary	DECIMAL, CHECK salary > 0
+city	VARCHAR, DEFAULT Pune
+joining_date	DATE
+
+Then perform these operations:
+
+A. Insert 5 employees.
+
+B. Display all employees.
+
+C. Find employees whose salary is greater than ₹60,000.
+
+D. Find employees from Pune.
+
+E. Display employees by salary descending.
+
+F. Find average salary.
+
+G. Find maximum salary.
+
+H. Find minimum salary.
+
+I. Find total salary expense.
+
+J. Find total number of employees.
+
+K. Display the top 3 highest-paid employees.
+
+L. Display employees 4–5 using LIMIT and OFFSET.
+
+M. Add a new column:
+
+department VARCHAR(50)
+
+N. Add a CHECK constraint so salary must be greater than 30,000.
+
+O. Add a comment in your SQL script explaining what the employee table represents.
+
+ANS:-->CREATE table employees(id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(50) NOT NULL, email VARCHAR(70) UNIQUE, age INT, salary DECIMAL(10,2), city VARCHAR(40) DEFAULT 'Pune', joining_date DATE, CHECK(age >= 18), CHECK(salary > 0));
+-->INSERT into employees VALUES('Ananta', 'ananta@gmail.com', 23, 45000.00, 'Pune', '2026-09-11'), ('Akash', 'aka@gmail.com', 29, 95000.00, 'nsk', '2026-06-18'),
+('Raj', 'raj@gmail.com', 22, 25000.00, 'nagpur', '2026-10-11'), ('arjun', 'arjun@gmail.com', 23, 77000.00, 'Pune', '2026-12-21'), ('minal', 'minal@gmail.com', 24, 35000.00, 'nanded', '2026-09-20');
+--> SELECT * from employees;
+--> SELECT * from employees where salary > 60000;
+--> SELECT * from employees where city = 'Pune';
+--> SELECT * from employees ORDER BY salary DESC;
+--> SELECT AVG(salary) from employees;
+--> SELECT MAX(salary) from employees;
+--> SELECT MAX(salary) from employees;
+--> SELECT SUM(salary) from employees;
+--> SELECT COUNT(*) FROM employees;
+--> SELECT * from employees ORDER BY salary DESC LIMIT 3;
+--> SELECT * from employees where LIMIT 2 OFFSET 3;
+--> ALTER table employees ADD column department VARCHAR(50);
+--> ALTER table employees ADD constraint salary_chk CHECK(salary > 30000);
+--> -- Employees records present in the table
+
+
+
+

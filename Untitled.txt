@@ -1,75 +1,28 @@
+ 
+                                                             Practice session
+ 
+Q)Write each and every MySQL queries on notepad?
 
-mysql> select * from employees;
-+-------------+--------+------------+------------+----------+--------+
-| employee_id | name   | department | experience | salary   | city   |
-+-------------+--------+------------+------------+----------+--------+
-|           1 | Ananta | IT         |          0 | 25000.00 | Pune   |
-|           2 | Rahul  | IT         |          2 | 45000.00 | Mumbai |
-|           3 | Priya  | HR         |          0 | 28000.00 | Pune   |
-|           4 | Amit   | Finance    |          5 | 65000.00 | Nagpur |
-|           5 | Sneha  | IT         |          1 | 35000.00 | Nashik |
-|           6 | Rohan  | HR         |          0 | 30000.00 | Pune   |
-+-------------+--------+------------+------------+----------+--------+
-6 rows in set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'pune' AND name = 'Ananta';
-Empty set (0.00 sec)
-
-mysql> select * from employees WHERE NOT (city = 'pune' AND name = 'Ananta');
-+-------------+-------+------------+------------+----------+--------+
-| employee_id | name  | department | experience | salary   | city   |
-+-------------+-------+------------+------------+----------+--------+
-|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
-|           3 | Priya | HR         |          0 | 28000.00 | Pune   |
-|           4 | Amit  | Finance    |          5 | 65000.00 | Nagpur |
-|           5 | Sneha | IT         |          1 | 35000.00 | Nashik |
-|           6 | Rohan | HR         |          0 | 30000.00 | Pune   |
-+-------------+-------+------------+------------+----------+--------+
-5 rows in set (0.00 sec)
-
-mysql> select * from employees WHERE NOT (city = 'pune') AND (name = 'Ananta');
-Empty set (0.00 sec)
-
-mysql> select * from employees WHERE (NOT city = 'pune' AND name = 'Ananta');
-Empty set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'pune' AND name = 'Rahul';
-+-------------+-------+------------+------------+----------+--------+
-| employee_id | name  | department | experience | salary   | city   |
-+-------------+-------+------------+------------+----------+--------+
-|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
-+-------------+-------+------------+------------+----------+--------+
-1 row in set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul';
-+-------------+-------+------------+------------+----------+--------+
-| employee_id | name  | department | experience | salary   | city   |
-+-------------+-------+------------+------------+----------+--------+
-|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
-+-------------+-------+------------+------------+----------+--------+
-1 row in set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul' AND department = 'IT';
-+-------------+-------+------------+------------+----------+--------+
-| employee_id | name  | department | experience | salary   | city   |
-+-------------+-------+------------+------------+----------+--------+
-|           2 | Rahul | IT         |          2 | 45000.00 | Mumbai |
-+-------------+-------+------------+------------+----------+--------+
-1 row in set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'Nagpur' AND name = 'Rahul' AND department = 'HR';
-Empty set (0.00 sec)
-
-mysql> select * from employees WHERE NOT city = 'Nagpur' OR name = 'Rahul';
-+-------------+--------+------------+------------+----------+--------+
-| employee_id | name   | department | experience | salary   | city   |
-+-------------+--------+------------+------------+----------+--------+
-|           1 | Ananta | IT         |          0 | 25000.00 | Pune   |
-|           2 | Rahul  | IT         |          2 | 45000.00 | Mumbai |
-|           3 | Priya  | HR         |          0 | 28000.00 | Pune   |
-|           5 | Sneha  | IT         |          1 | 35000.00 | Nashik |
-|           6 | Rohan  | HR         |          0 | 30000.00 | Pune   |
-+-------------+--------+------------+------------+----------+--------+
-5 rows in set (0.00 sec)
-
-mysql> ^A
+SHOW databases; //To show the all databases
+CREATE DATABASE company_db;//create new database
+USE company_db;//To use database
+CREATE table employees(Id int AUTO_INCREMENT PRIMARY KEY, employee_name varchar(70), email varchar(100));// Create table in database
+DESC employees;
+SHOW tables;//To show the tables(eg.employees) in the current database
+INSERT into employees(employee_name, email)VALUES('Ananta', 'abc@gmail.com');//Insert data into table
+SELECT * from employees;// Select all records from employees table
+SELECT employee_name from employees; // Select specific colm from table
+SELECT employee_name, email from employees;//Select multiple column from table
+SELECT * from employees where employee_id = 4;// Select employee based on ID
+SELECT * from employees where salary >450000 AND city = 'pune';//Select only those employees whose salary is greater than 450000 and            city is pune
+SELECT * from employees where salary >450000 OR city = 'pune';//Select employees whose salary is greater than 450000 or city is pune
+SELECT * from employees where NOT city = 'pune';//Select all data except those who has city pune
+SELECT * from employees order by salary ASC;//Select recordes from table based on salary ascending order
+SELECT * from employees order by salary DSC;//Select recordes from table based on salary descending order
+ALTER table employees ADD column mob_No decimal;// ADD column to an existing table
+ALTER table employees RENAME column employee_id TO id; // RENAME column from existing column
+ALTER table employees MODIFY column mob_No bigint;// To change the datatype of existing column
+ALTER table employees DROP column mob_No;//DROP or Delete col from the table
+DROP table employees;//TO drop the entire table
+DROP database company_db;//TO drop the database
+TRUNCATE table employees;//To delete all the records from the table without deleting the structure of the table

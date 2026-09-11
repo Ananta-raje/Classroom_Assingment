@@ -1,0 +1,35 @@
+                                        Programing Batch Task
+
+Q)Write each and every MySQL queries on notepad?
+
+SHOW databases;
+CREATE DATABASES ecommerce_db;
+USE ecommerce_db;
+CREATE TABLE products (product_id INT PRIMARY KEY AUTO_INCREMENT, product_code BIGINT, rating FLOAT, weight DOUBLE, price DECIMAL(10,2), product_name VARCHAR(100), size CHAR(2), description TEXT, launch_date DATE, delivery_time TIME, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, is_available BOOLEAN DEFAULT TRUE, product_details JSON );
+DESC products;
+INSERT INTO products(product_code, rating, weight, price, product_name, size, description, launch_date, delivery_time, is_available, product_details) VALUES( 10000000001, 4.5, 1.25, 49999.99, 'Samsung Galaxy S25', 'XL', 'Samsung Galaxy smartphone with AMOLED display and powerful processor.', '2026-01-15', '02:30:00', TRUE,'{"brand":"Samsung","color":"Black","ram":"12GB","storage":"256GB"}');
+UPDATE products set size = 'SM' where id =2;
+DELETE from products where product_id = 13; 
+SELECT * from products;
+SELECT product_name from products; 
+SELECT product_name, rating, price from products;
+//Comparison operator
+SELECT * from products where product_id = 4;
+//Logical operator
+SELECT * from products where price >50000 AND size = 'XL';
+SELECT * from products where salary >50000 OR size = 'L';
+SELECT * from products where salary >50000 OR size = 'L';
+SELECT * from products where NOT size = 'XL';
+//Order By
+SELECT * from products order by price ASC;
+SELECT * from products order by price DSC;
+SELECT * from products order by weight, price DESC;
+//Limit Offset
+SELECT * from products Limit 5;
+SELECT * from products Limit 5 Offset 1;
+//Alter queries
+ALTER table products ADD column status varchar(50);
+ALTER table products MODIFY column status varchar(100);
+
+
+
