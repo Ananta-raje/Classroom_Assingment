@@ -1,0 +1,226 @@
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use thekiranacademy;
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_thekiranacademy |
++---------------------------+
+| customers                 |
+| employees                 |
+| insurance                 |
++---------------------------+
+3 rows in set (0.01 sec)
+
+mysql> create table shop;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table shop(proId int AUTO_INCREMENT PRIMARY KEY, productName VARCHAR(70), price int, quantity int, paymentMethod VARCHAR(60), salesPerson VARCHAR(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc shop;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| proId         | int         | NO   | PRI | NULL    | auto_increment |
+| productName   | varchar(70) | YES  |     | NULL    |                |
+| price         | int         | YES  |     | NULL    |                |
+| quantity      | int         | YES  |     | NULL    |                |
+| paymentMethod | varchar(60) | YES  |     | NULL    |                |
+| salesPerson   | varchar(50) | YES  |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.02 sec)
+
+mysql> INSERT INTO shop
+    -> (productName, price, quantity, paymentMethod, salesPerson)
+    -> VALUES
+    -> ('Laptop', 55000, 10, 'UPI', 'Rahul'),
+    -> ('Mouse', 800, 25, 'Cash', 'Priya'),
+    -> ('Keyboard', 1500, 15, 'Credit Card', 'Amit'),
+    -> ('Mobile Phone', 25000, 8, 'UPI', 'Sneha'),
+    -> ('Headphones', 2200, 20, 'Debit Card', 'Rohit'),
+    -> ('Monitor', 12000, 12, 'UPI', 'Neha'),
+    -> ('Printer', 8500, 6, 'Cash', 'Vikas'),
+    -> ('USB Cable', 400, 30, 'UPI', 'Pooja'),
+    -> ('Tablet', 18000, 7, 'Credit Card', 'Akash'),
+    -> ('Webcam', 3200, 14, 'Debit Card', 'Kiran'),
+    -> ('Power Bank', 1500, 18, 'Cash', 'Rahul'),
+    -> ('Smart Watch', 4500, 9, 'UPI', 'Priya'),
+    -> ('External Hard Disk', 6000, 11, 'Credit Card', 'Amit'),
+    -> ('Bluetooth Speaker', 2800, 16, 'UPI', 'Sneha'),
+    -> ('Laptop Bag', 1200, 22, 'Cash', 'Rohit');
+Query OK, 15 rows affected (0.02 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> select * from shop;
++-------+--------------------+-------+----------+---------------+-------------+
+| proId | productName        | price | quantity | paymentMethod | salesPerson |
++-------+--------------------+-------+----------+---------------+-------------+
+|     1 | Laptop             | 55000 |       10 | UPI           | Rahul       |
+|     2 | Mouse              |   800 |       25 | Cash          | Priya       |
+|     3 | Keyboard           |  1500 |       15 | Credit Card   | Amit        |
+|     4 | Mobile Phone       | 25000 |        8 | UPI           | Sneha       |
+|     5 | Headphones         |  2200 |       20 | Debit Card    | Rohit       |
+|     6 | Monitor            | 12000 |       12 | UPI           | Neha        |
+|     7 | Printer            |  8500 |        6 | Cash          | Vikas       |
+|     8 | USB Cable          |   400 |       30 | UPI           | Pooja       |
+|     9 | Tablet             | 18000 |        7 | Credit Card   | Akash       |
+|    10 | Webcam             |  3200 |       14 | Debit Card    | Kiran       |
+|    11 | Power Bank         |  1500 |       18 | Cash          | Rahul       |
+|    12 | Smart Watch        |  4500 |        9 | UPI           | Priya       |
+|    13 | External Hard Disk |  6000 |       11 | Credit Card   | Amit        |
+|    14 | Bluetooth Speaker  |  2800 |       16 | UPI           | Sneha       |
+|    15 | Laptop Bag         |  1200 |       22 | Cash          | Rohit       |
++-------+--------------------+-------+----------+---------------+-------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Laptop             |     10 |
+| Mouse              |     25 |
+| Keyboard           |     15 |
+| Mobile Phone       |      8 |
+| Headphones         |     20 |
+| Monitor            |     12 |
+| Printer            |      6 |
+| USB Cable          |     30 |
+| Tablet             |      7 |
+| Webcam             |     14 |
+| Power Bank         |     18 |
+| Smart Watch        |      9 |
+| External Hard Disk |     11 |
+| Bluetooth Speaker  |     16 |
+| Laptop Bag         |     22 |
++--------------------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName HAVING SUM(quantity) >= 5;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Laptop             |     10 |
+| Mouse              |     25 |
+| Keyboard           |     15 |
+| Mobile Phone       |      8 |
+| Headphones         |     20 |
+| Monitor            |     12 |
+| Printer            |      6 |
+| USB Cable          |     30 |
+| Tablet             |      7 |
+| Webcam             |     14 |
+| Power Bank         |     18 |
+| Smart Watch        |      9 |
+| External Hard Disk |     11 |
+| Bluetooth Speaker  |     16 |
+| Laptop Bag         |     22 |
++--------------------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName HAVING SUM(quantity) >= 10;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Laptop             |     10 |
+| Mouse              |     25 |
+| Keyboard           |     15 |
+| Headphones         |     20 |
+| Monitor            |     12 |
+| USB Cable          |     30 |
+| Webcam             |     14 |
+| Power Bank         |     18 |
+| External Hard Disk |     11 |
+| Bluetooth Speaker  |     16 |
+| Laptop Bag         |     22 |
++--------------------+--------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName HAVING totalC > 5 AND totalC < 10;
++--------------+--------+
+| productName  | totalC |
++--------------+--------+
+| Mobile Phone |      8 |
+| Printer      |      6 |
+| Tablet       |      7 |
+| Smart Watch  |      9 |
++--------------+--------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop WHERE prcie >= 30000 GROUP BY productName;
+ERROR 1054 (42S22): Unknown column 'prcie' in 'where clause'
+mysql> SELECT productName, SUM(quantity) AS totalC from shop WHERE price >= 30000 GROUP BY productName;
++-------------+--------+
+| productName | totalC |
++-------------+--------+
+| Laptop      |     10 |
++-------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName ORDER BY totalC ASC;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Printer            |      6 |
+| Tablet             |      7 |
+| Mobile Phone       |      8 |
+| Smart Watch        |      9 |
+| Laptop             |     10 |
+| External Hard Disk |     11 |
+| Monitor            |     12 |
+| Webcam             |     14 |
+| Keyboard           |     15 |
+| Bluetooth Speaker  |     16 |
+| Power Bank         |     18 |
+| Headphones         |     20 |
+| Laptop Bag         |     22 |
+| Mouse              |     25 |
+| USB Cable          |     30 |
++--------------------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Laptop             |     10 |
+| Mouse              |     25 |
+| Keyboard           |     15 |
+| Mobile Phone       |      8 |
+| Headphones         |     20 |
+| Monitor            |     12 |
+| Printer            |      6 |
+| USB Cable          |     30 |
+| Tablet             |      7 |
+| Webcam             |     14 |
+| Power Bank         |     18 |
+| Smart Watch        |      9 |
+| External Hard Disk |     11 |
+| Bluetooth Speaker  |     16 |
+| Laptop Bag         |     22 |
++--------------------+--------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT productName, SUM(quantity) AS totalC from shop GROUP BY productName ORDER BY totalC ;
++--------------------+--------+
+| productName        | totalC |
++--------------------+--------+
+| Printer            |      6 |
+| Tablet             |      7 |
+| Mobile Phone       |      8 |
+| Smart Watch        |      9 |
+| Laptop             |     10 |
+| External Hard Disk |     11 |
+| Monitor            |     12 |
+| Webcam             |     14 |
+| Keyboard           |     15 |
+| Bluetooth Speaker  |     16 |
+| Power Bank         |     18 |
+| Headphones         |     20 |
+| Laptop Bag         |     22 |
+| Mouse              |     25 |
+| USB Cable          |     30 |
++--------------------+--------+
+15 rows in set (0.00 sec)
+
+mysql>
